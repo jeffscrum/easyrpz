@@ -175,7 +175,7 @@ func main() {
 			uniqueHosts[host] = true
 
 			// Write the RPZ record with A record
-			_, err = fmt.Fprintf(outputFile, "%s IN A %s\n", host, ip)
+			_, err = fmt.Fprintf(outputFile, "%s CNAME .\n", host)
 			if err != nil {
 				fmt.Println("Error writing to the output file:", err)
 				return
@@ -184,7 +184,7 @@ func main() {
 			// Check if IP is "0.0.0.0" and include wildcard record
 			if *wildcardFlag && ip == "0.0.0.0" {
 				wildcardHost := "*." + host
-				_, err = fmt.Fprintf(outputFile, "%s IN A %s\n", wildcardHost, ip)
+				_, err = fmt.Fprintf(outputFile, "%s CNAME .\n", wildcardHost)
 				if err != nil {
 					fmt.Println("Error writing to the output file:", err)
 					return
